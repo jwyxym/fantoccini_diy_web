@@ -29,17 +29,17 @@ async fn main() -> Result<()> {
     fs::create_dir_all("downloads")?;
     loop {
         let elements:Vec<Element>  = client.find_all(Locator::Css(".pic")).await?;
-        if count == elements.len() as u64 {
-            for i in elements.iter() {
-                let src = i.text().await?;
-                let name = i.attr("id").await.unwrap_or_default();
+        if count + 1 == elements.len() as u64 {
+            for i in elements.iter().skip(1) {
+                let src: String = i.text().await?;
+                let name: Option<String> = i.attr("id").await.unwrap_or_default();
                 match name {
-                    Some(N) => {
-                        println!("{}", &N);
-                        let bytes = base64::decode(src)?;
-                        let mut path = PathBuf::new();
+                    Some(n) => {
+                        println!("{}", &n);
+                        let bytes: Vec<u8> = base64::decode(src)?;
+                        let mut path: PathBuf = PathBuf::new();
                         path.push("downloads");
-                        path.push(format!("{}.jpg", N));
+                        path.push(format!("{}.jpg", n));
                         std::fs::write(path, bytes)?;
                     }
                     None => {}
