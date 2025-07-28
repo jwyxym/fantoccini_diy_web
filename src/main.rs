@@ -20,7 +20,7 @@ use std::fs;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let client: Client = Client::new("http://localhost:4444").await?;
+    let client: Client = Client::new("http://localhost:9515").await?;
     
     client.goto("http://localhost:8000/").await?;
     let client: Client = print(client).await?;
