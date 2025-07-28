@@ -22,7 +22,7 @@ use std::fs;
 async fn main() -> Result<()> {
     let client: Client = Client::new("http://localhost:4444").await?;
     
-    client.goto("http://localhost:5173/").await?;
+    client.goto("http://localhost:8000/").await?;
     let client: Client = print(client).await?;
     thread::sleep(Duration::from_secs(2));
     let elements:Vec<Element>  = client.find_all(Locator::Css(".pic")).await?;
