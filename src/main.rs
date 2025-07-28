@@ -23,7 +23,7 @@ async fn main() -> Result<()> {
     println!("http://localhost:9515");
     let client: Client = Client::new("http://localhost:9515").await?;
     
-    client.goto("http://localhost:8000/").await?;
+    client.goto("http://localhost:5173/").await?;
     let client: Client = print(client).await?;
     thread::sleep(Duration::from_secs(2));
     let elements:Vec<Element>  = client.find_all(Locator::Css(".pic")).await?;
