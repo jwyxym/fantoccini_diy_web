@@ -26,10 +26,12 @@ async fn main() -> Result<()> {
     thread::sleep(Duration::from_secs(2));
     let elements:Vec<Element>  = client.find_all(Locator::Css(".pic")).await?;
     fs::create_dir_all("downloads")?;
+    println!("{}"elements.len());
 
     for i in elements.iter() {
         let src = i.text().await?;
         let name = i.attr("id").await.unwrap_or_default();
+        println!("{}", &name );
         match name {
             Some(N) => {
                 println!("{}", &N);
